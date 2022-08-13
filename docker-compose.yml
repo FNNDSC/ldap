@@ -1,0 +1,37 @@
+# https://docs.docker.com/compose/yml/
+# Each service defined in docker-compose.yml must specify exactly one of
+# image or build. Other keys are optional, and are analogous to their
+# docker run command-line counterparts.
+#
+# As with docker run, options specified in the Dockerfile (e.g., CMD,
+# EXPOSE, VOLUME, ENV) are respected by default - you don't need to
+# specify them again in docker-compose.yml.
+#
+# Fedora (and RHEL, CentOS) use SELinux.
+# Docker needs :z volume mount options to provide a context label.
+# See man docker-run
+
+version: '3.7'
+services:
+  ldap_server:
+    image: localhost/openldap:001
+    build:
+      context: .
+    environment:
+      LDAP_ADMIN_PASSWORD: admin1234
+      LDAP_BASE_DN: dc=fnndsc,dc=org
+    ports:
+      - 389:389
+    volumes:
+      - ldap_data:/var/lib/ldap
+      - ldap_config:/etc/ldap/slapd.d
+  ldap_server_admin:
+    image: osixia/phpldapadmin:0.9.0
+    ports:
+      - 8090:80
+    environment:
+      PHPLDAPADMIN_LDAP_HOSTS: ldap_server
+      PHPLDAPADMIN_HTTPS: 'false'
+volumes:
+  ldap_data:
+  ldap_config:

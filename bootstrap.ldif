@@ -1,0 +1,52 @@
+dn: cn=chris,dc=fnndsc,dc=org
+changetype: add
+objectclass: inetOrgPerson
+cn: chris
+givenname: chris
+sn: Chris
+displayname: Chris User
+mail: chris@babymri.org
+userpassword: chris1234
+
+dn: cn=cube,dc=fnndsc,dc=org
+changetype: add
+objectclass: inetOrgPerson
+cn: cube
+givenname: cube
+sn: Cube
+displayname: Cube User
+mail: cube@babymri.org
+userpassword: cube1234
+
+dn: cn=developer,dc=fnndsc,dc=org
+changetype: add
+objectclass: inetOrgPerson
+cn: developer
+givenname: developer
+sn: Developer
+displayname: Developer User
+mail: developer@babymri.org
+userpassword: developer1234
+
+dn: ou=Groups,dc=fnndsc,dc=org
+changetype: add
+objectclass: organizationalUnit
+ou: Groups
+
+dn: ou=Users,dc=fnndsc,dc=org
+changetype: add
+objectclass: organizationalUnit
+ou: Users
+
+dn: cn=admins,ou=Groups,dc=fnndsc,dc=org
+changetype: add
+cn: Admins
+objectclass: groupOfUniqueNames
+uniqueMember: cn=chris,dc=fnndsc,dc=org
+
+dn: cn=staff,ou=Groups,dc=fnndsc,dc=org
+changetype: add
+cn: Staff
+objectclass: groupOfUniqueNames
+uniqueMember: cn=cube,dc=fnndsc,dc=org
+uniqueMember: cn=developer,dc=fnndsc,dc=org
